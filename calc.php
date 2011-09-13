@@ -109,6 +109,7 @@ class CalcDice extends CalcSet
 		if(intval($matches['multiple']) == 0 && $matches['multiple'] != '0') {
 			$matches['multiple'] = 1;
 		}
+		$matches += array('matches'=>'', 'openroll' => '', 'reroll' => '', 'keep' => '');
 		for($z = 0; $z < $matches['multiple']; $z++) {
 			$keep = true;
 
@@ -195,10 +196,13 @@ class CalcDice extends CalcSet
 		elseif($dietype == '%') {
 			$newval = rand(1, 100);
 		}
-		elseif($dietype == '[') {
+		elseif($dietype[0] == '[') {
 			$dietype = trim($dietype, '[]');
 			$opts = explode(',', $dietype);
 			$newval = $opts[rand(0, count($opts)-1)];
+		}
+		else {
+			var_dump($dietype);
 		}
 		return $newval;
 	}
@@ -244,7 +248,7 @@ class CalcDice extends CalcSet
 
 class CalcOperation
 {
-	function calc($operator, $operand2, $operand1)
+	static function calc($operator, $operand2, $operand1)
 	{
 		switch($operator) {
 			case '+':
@@ -266,7 +270,7 @@ class CalcOperation
 		}
 	}
 	
-	function reduce($r) {
+	static function reduce($r) {
 		if($r instanceof Calc) {
 			return $r->calc();
 		}
@@ -276,7 +280,7 @@ class CalcOperation
 		throw Exception('This is not a number');
 	}
 	
-	function add($r1, $r2)
+	static function add($r1, $r2)
 	{
 		try{
 			return self::reduce($r1) + self::reduce($r2);
@@ -286,35 +290,35 @@ class CalcOperation
 		}
 	}
 	
-	function multiply($r1, $r2)
+	static function multiply($r1, $r2)
 	{
 		if(is_numeric($r1) && is_numeric($r2)) {
 			return $r1 * $r2;
 		}
 	}
 	
-	function subtract($r1, $r2)
+	static function subtract($r1, $r2)
 	{
 		if(is_numeric($r1) && is_numeric($r2)) {
 			return $r1 - $r2;
 		}
 	}
 	
-	function divide($r1, $r2)
+	static function divide($r1, $r2)
 	{
 		if(is_numeric($r1) && is_numeric($r2)) {
 			return $r1 / $r2;
 		}
 	}
 	
-	function exponent($r1, $r2)
+	static function exponent($r1, $r2)
 	{
 		if(is_numeric($r1) && is_numeric($r2)) {
 			return pow($r1, $r2);
 		}
 	}
 	
-	function greaterthan($r1, $r2)
+	static function greaterthan($r1, $r2)
 	{
 		try{
 			return self::reduce($r1) > self::reduce($r2);
@@ -324,14 +328,14 @@ class CalcOperation
 		}
 	}
 	
-	function lessthan($r1, $r2)
+	static function lessthan($r1, $r2)
 	{
 		if(is_numeric($r1) && is_numeric($r2)) {
 			return ($r1 < $r2);
 		}
 	}
 	
-	function equalto($r1, $r2)
+	static function equalto($r1, $r2)
 	{
 		if(is_numeric($r1) && is_numeric($r2)) {
 			return ($r1 == $r2);
