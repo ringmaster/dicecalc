@@ -277,7 +277,7 @@ class CalcOperation
 		if(is_numeric($r)) {
 			return $r;
 		}
-		throw Exception('This is not a number');
+		throw new Exception('This is not a number');
 	}
 	
 	static function add($r1, $r2)
