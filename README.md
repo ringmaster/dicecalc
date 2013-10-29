@@ -1,6 +1,8 @@
 Dice Roller
+===========
 
 How to use
+----------
 Create a new Calc class, and pass the dice expression to the constructor:
 $calc = new Calc($expression);
 
@@ -11,6 +13,7 @@ Output the result of the roll:
 echo $calc->calc();
 
 Dice Expressions
+----------------
 The basic expression is to use a "d" followed by the number of sides of the die to roll.  Examples:
 d6 => roll a six-sided die
 d20 => roll a twenty-sided die
@@ -74,6 +77,7 @@ A stupid example nobody would ever use, I hope:
 3d6r<4o=6k>6  Roll 3d6.  Reroll any die less than 4.  When any die is a 6, reroll and add the new value to the original one.  Sum the die totals of only those dice that are greater than 6.
 
 Future Enhancements
+-------------------
 * Better group handling
 * Better custom die handling
 * Variable replacements (To handle rolls like: d20 + $str_bonus > $target )
