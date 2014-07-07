@@ -22,7 +22,7 @@ class Calc
     protected $rpn = array();
     protected $infix = array();
 
-    function __construct($expression = '')
+    public function __construct($expression = '')
     {
         $this->expression = str_replace(' ', '', $expression);
 
@@ -30,93 +30,91 @@ class Calc
 
         $stack = array();
 
-        foreach($matches as $match) {
+        foreach ($matches as $match) {
             $match = array_filter($match);
 
-            if(isset($match['numeral'])) {
+            if (isset($match['numeral'])) {
                 $this->rpn[] = $match['numeral'];
                 $this->infix[] = $match['numeral'];
-            }
-            elseif(isset($match['dice'])) {
+            } elseif (isset($match['dice'])) {
                 $dice = new CalcDice($match['dice']);
                 $this->rpn[] = $dice->value();
                 $this->infix[] = $dice;
-            }
-            elseif(isset($match['set'])) {
+            } elseif (isset($match['set'])) {
                 $this->rpn[] = new CalcSet($match['set']);
                 $this->infix[] = end($this->rpn);
-            }
-            elseif(isset($match['operator'])) {
-                while(count($stack) > 0 && end($stack) != '(' && $this->ooo[$match['operator']] <= $this->ooo[end($stack)]) {
+            } elseif (isset($match['operator'])) {
+                while (
+                    count($stack) > 0
+                    &&
+                    end($stack) != '('
+                    &&
+                    $this->ooo[$match['operator']] <= $this->ooo[end($stack)]
+                ) {
                     $this->rpn[] = array_pop($stack);
                 }
                 $stack[] = $match['operator'];
                 $this->infix[] = $match['operator'];
-            }
-            elseif(isset($match['variable'])) {
+            } elseif (isset($match['variable'])) {
                 $this->rpn[] = $match['variable'];
                 $this->infix[] = end($this->rpn);
-            }
-            elseif(isset($match['parens'])) {
+            } elseif (isset($match['parens'])) {
                 $this->infix[] = $match['parens'];
-                if($match['parens'] == '(') {
+                if ($match['parens'] == '(') {
                     $stack[] = $match['parens'];
-                }
-                else {
-                    while(count($stack) > 0 && end($stack) != '(') {
+                } else {
+                    while (count($stack) > 0 && end($stack) != '(') {
                         $this->rpn[] = array_pop($stack);
                     }
                     array_pop($stack);
                 }
-            }
-            else {
+            } else {
                 $stack = array('Invalid token:', $match);
                 break;
             }
         }
 
-        while(count($stack) > 0) {
+        while (count($stack) > 0) {
             $this->rpn[] = array_pop($stack);
         }
     }
 
-    function calc($vars = array() )
+    public function calc($vars = array())
     {
 
         $stack = array();
 
-        foreach($this->rpn as $step) {
-            if(is_object($step) || !isset($this->ooo[$step])) {
+        foreach ($this->rpn as $step) {
+            if (is_object($step) || !isset($this->ooo[$step])) {
                 $stack[] = $step;
-            }
-            else {
+            } else {
                 //echo "Operation: {$step}\n";
                 //print_r($stack);
                 $r1 = array_pop($stack);
                 $r2 = array_pop($stack);
 
-                if(is_numeric($r1) && is_numeric($r2)) {
+                if (is_numeric($r1) && is_numeric($r2)) {
                     $stack[] = CalcOperation::calc($step, $r1, $r2);
                 }
-                if($r1 instanceof CalcSet && is_numeric($r2)) {
+                if ($r1 instanceof CalcSet && is_numeric($r2)) {
                     $stack[] = $r1->calc($step, $r2);
                 }
-                if(is_numeric($r1) && $r2 instanceof CalcSet) {
+                if (is_numeric($r1) && $r2 instanceof CalcSet) {
                     $stack[] = $r2->rcalc($step, $r1);
                 }
             }
         }
 
-        if(count($stack) > 1) {
+        if (count($stack) > 1) {
             return 'Missing operator near "' . $stack[1] . '".';
-        }
-        else {
+        } else {
             $out = reset($stack);
+
             return $out;
         }
     }
 
-    function infix()
+    public function infix()
     {
         return implode(' ', $this->infix);
     }
