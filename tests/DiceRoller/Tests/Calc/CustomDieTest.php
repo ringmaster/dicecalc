@@ -24,7 +24,10 @@ class CustomDieTest extends \PHPUnit_Framework_TestCase
 
             $i++;
 
-            $this->assertTrue(in_array($result, $availableValues), sprintf('Roll result %s not found in expected array', $result));
+            $this->assertTrue(
+                in_array($result, $availableValues),
+                sprintf('Roll result %s not found in expected array', $result)
+            );
 
             if (!array_key_exists($result, $foundElements)) {
                 $foundElements[$result] = 0;
@@ -83,7 +86,10 @@ class CustomDieTest extends \PHPUnit_Framework_TestCase
 
             $i++;
 
-            $this->assertTrue(in_array($resultString, $checkValues), sprintf('Roll result %s not found in expected array', $result));
+            $this->assertTrue(
+                in_array($resultString, $checkValues),
+                sprintf('Roll result %s not found in expected array', $result)
+            );
 
             if (!array_key_exists($resultString, $foundElements)) {
                 $foundElements[$resultString] = 0;
