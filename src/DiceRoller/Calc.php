@@ -112,12 +112,7 @@ class Calc
         }
         else {
             $out = reset($stack);
-            if(is_bool($out)) {
-                return $out ? '<span class="true">true</span>' : '<span class="false">false</span>';
-            }
-            else {
-                return $out;
-            }
+            return $out;
         }
     }
 
