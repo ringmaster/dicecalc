@@ -34,14 +34,14 @@ class CalcOperation
         if (is_numeric($r)) {
             return $r;
         }
-        throw new Exception('This is not a number');
+        throw new \Exception('This is not a number');
     }
 
     public static function add($r1, $r2)
     {
         try {
             return self::reduce($r1) + self::reduce($r2);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $r1 . $r2;
         }
     }
@@ -78,7 +78,7 @@ class CalcOperation
     {
         try {
             return self::reduce($r1) > self::reduce($r2);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $r1 > $r2;
         }
     }
