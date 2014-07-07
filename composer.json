@@ -4,7 +4,8 @@
     "version": "1.0.0",
     "keywords": ["dice", "dice calc", "dice roller"],
     "require-dev": {
-        "phpunit/phpunit": "4.1.*"
+        "phpunit/phpunit": "4.1.*",
+        "fabpot/php-cs-fixer": "@stable"
     },
     "authors": [
         {
