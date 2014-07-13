@@ -8,7 +8,6 @@ class CalcDice extends CalcSet
     {
         $this->values = array();
         $this->label = $v;
-        $usevalues = array();
         preg_match('/' . Calc::DICE_REGEX . '/i', $v, $matches);
         if (intval($matches['multiple']) == 0 && $matches['multiple'] != '0') {
             $matches['multiple'] = 1;
@@ -130,18 +129,19 @@ class CalcDice extends CalcSet
                 }
             }
         }
-        $_out = '[' . $this->label . ':';
+
+        $result = '[' . $this->label . ':';
         $comma = '';
         foreach ($out as $o) {
             if ($o instanceof Calc) {
-                $_out .= $comma . $o->calc();
+                $result .= $comma . $o->calc();
             } else {
-                $_out .= $comma . $o;
+                $result .= $comma . $o;
             }
             $comma = ' + ';
         }
-        $_out .= ']';
+        $result .= ']';
 
-        return $_out;
+        return $result;
     }
 }

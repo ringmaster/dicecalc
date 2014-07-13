@@ -79,7 +79,7 @@ class Calc
         }
     }
 
-    public function calc($vars = array())
+    public function calc()
     {
 
         $stack = array();
