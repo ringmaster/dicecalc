@@ -4,6 +4,12 @@ namespace DiceRoller;
 
 class CalcOperation
 {
+    /**
+     * @param string $operator
+     * @param $operand2
+     * @param $operand1
+     * @return bool|numeric
+     */
     public static function calc($operator, $operand2, $operand1)
     {
         switch ($operator) {
@@ -26,6 +32,11 @@ class CalcOperation
         }
     }
 
+    /**
+     * @param $r
+     * @return numeric|string
+     * @throws \Exception
+     */
     public static function reduce($r)
     {
         if ($r instanceof Calc) {
@@ -37,6 +48,11 @@ class CalcOperation
         throw new \Exception('This is not a number');
     }
 
+    /**
+     * @param numeric $r1
+     * @param numeric $r2
+     * @return bool|numeric
+     */
     public static function add($r1, $r2)
     {
         try {
@@ -46,6 +62,11 @@ class CalcOperation
         }
     }
 
+    /**
+     * @param numeric $r1
+     * @param numeric $r2
+     * @return bool|numeric
+     */
     public static function multiply($r1, $r2)
     {
         if (is_numeric($r1) && is_numeric($r2)) {
@@ -53,6 +74,11 @@ class CalcOperation
         }
     }
 
+    /**
+     * @param numeric $r1
+     * @param numeric $r2
+     * @return bool|numeric
+     */
     public static function subtract($r1, $r2)
     {
         if (is_numeric($r1) && is_numeric($r2)) {
@@ -60,6 +86,11 @@ class CalcOperation
         }
     }
 
+    /**
+     * @param numeric $r1
+     * @param numeric $r2
+     * @return bool|float
+     */
     public static function divide($r1, $r2)
     {
         if (is_numeric($r1) && is_numeric($r2)) {
@@ -67,6 +98,11 @@ class CalcOperation
         }
     }
 
+    /**
+     * @param number $r1
+     * @param number $r2
+     * @return bool|number
+     */
     public static function exponent($r1, $r2)
     {
         if (is_numeric($r1) && is_numeric($r2)) {
@@ -74,6 +110,11 @@ class CalcOperation
         }
     }
 
+    /**
+     * @param number $r1
+     * @param number $r2
+     * @return bool
+     */
     public static function greaterthan($r1, $r2)
     {
         try {
@@ -83,6 +124,11 @@ class CalcOperation
         }
     }
 
+    /**
+     * @param number $r1
+     * @param number $r2
+     * @return bool
+     */
     public static function lessthan($r1, $r2)
     {
         if (is_numeric($r1) && is_numeric($r2)) {
@@ -90,6 +136,11 @@ class CalcOperation
         }
     }
 
+    /**
+     * @param number $r1
+     * @param number $r2
+     * @return bool
+     */
     public static function equalto($r1, $r2)
     {
         if (is_numeric($r1) && is_numeric($r2)) {
