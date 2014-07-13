@@ -55,11 +55,23 @@ class CalcOperation
      */
     public static function add($r1, $r2)
     {
-        try {
-            return self::reduce($r1) + self::reduce($r2);
-        } catch (\Exception $e) {
-            return $r1 . $r2;
+        if (!is_numeric($r1)) {
+            try {
+                $r1 = self::reduce($r1);
+            } catch (\Exception $e) {
+                return false;
+            }
         }
+
+        if (!is_numeric($r2)) {
+            try {
+                $r2 = self::reduce($r2);
+            } catch (\Exception $e) {
+                return false;
+            }
+        }
+
+        return $r1 + $r2;
     }
 
     /**
@@ -72,6 +84,8 @@ class CalcOperation
         if (is_numeric($r1) && is_numeric($r2)) {
             return $r1 * $r2;
         }
+
+        return false;
     }
 
     /**
@@ -84,6 +98,8 @@ class CalcOperation
         if (is_numeric($r1) && is_numeric($r2)) {
             return $r1 - $r2;
         }
+
+        return false;
     }
 
     /**
@@ -96,6 +112,8 @@ class CalcOperation
         if (is_numeric($r1) && is_numeric($r2)) {
             return $r1 / $r2;
         }
+
+        return false;
     }
 
     /**
@@ -108,6 +126,8 @@ class CalcOperation
         if (is_numeric($r1) && is_numeric($r2)) {
             return pow($r1, $r2);
         }
+
+        return false;
     }
 
     /**
@@ -117,11 +137,23 @@ class CalcOperation
      */
     public static function greaterthan($r1, $r2)
     {
-        try {
-            return self::reduce($r1) > self::reduce($r2);
-        } catch (\Exception $e) {
-            return $r1 > $r2;
+        if (!is_numeric($r1)) {
+            try {
+                $r1 = self::reduce($r1);
+            } catch (\Exception $e) {
+                return false;
+            }
         }
+
+        if (!is_numeric($r2)) {
+            try {
+                $r2 = self::reduce($r2);
+            } catch (\Exception $e) {
+                return false;
+            }
+        }
+
+        return $r1 > $r2;
     }
 
     /**
@@ -134,6 +166,8 @@ class CalcOperation
         if (is_numeric($r1) && is_numeric($r2)) {
             return ($r1 < $r2);
         }
+
+        return false;
     }
 
     /**
@@ -146,5 +180,7 @@ class CalcOperation
         if (is_numeric($r1) && is_numeric($r2)) {
             return ($r1 == $r2);
         }
+
+        return false;
     }
 }
