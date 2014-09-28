@@ -4,6 +4,11 @@ Dice Roller
 
 This is a PSR compatible fork from https://github.com/ringmaster/dicecalc
 
+Project status
+--------------
+
+{<img src="https://travis-ci.org/sergej-kurakin/dicecalc.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/sergej-kurakin/dicecalc]
+
 How to use
 ----------
 Create a new Calc class, and pass the dice expression to the constructor::
