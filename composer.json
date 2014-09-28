@@ -4,13 +4,14 @@
     "version": "1.0.0",
     "keywords": ["dice", "dice calc", "dice roller"],
     "require-dev": {
-        "phpunit/phpunit": "4.1.*",
+        "phpunit/phpunit": "@stable",
         "fabpot/php-cs-fixer": "@stable",
-        "phpmd/phpmd": "1.4.*",
-        "phploc/phploc": "2.0.*",
-        "pdepend/pdepend": "1.1.*",
-        "sebastian/phpcpd": "2.0.*",
-        "sebastian/phpdcd": "1.0.*"
+        "phpmd/phpmd": "@stable",
+        "phploc/phploc": "@stable",
+        "pdepend/pdepend": "@stable",
+        "sebastian/phpcpd": "@stable",
+        "sebastian/phpdcd": "@stable",
+        "squizlabs/php_codesniffer": "@stable"
     },
     "authors": [
         {
@@ -19,8 +20,7 @@
         }
     ],
     "require": {
-        "php": ">=5.3.3",
-        "squizlabs/php_codesniffer": "1.5.*"
+        "php": ">=5.3.3"
     },
     "autoload": {
         "psr-0": { "DiceRoller\\": "src/" }
