@@ -1,8 +1,8 @@
 {
     "name": "sergej-kurakin/diceroller",
-    "description": "Dice Roller",
+    "description": "Dice Roller, PSR compatible fork from https://github.com/ringmaster/dicecalc ",
     "version": "1.0.0",
-    "keywords": ["dice", "dice calc", "dice roller"],
+    "keywords": ["dice", "dice calc", "dice calculator", "dice roller"],
     "require-dev": {
         "phpunit/phpunit": "@stable",
         "fabpot/php-cs-fixer": "@stable",

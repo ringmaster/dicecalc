@@ -2,6 +2,8 @@
 Dice Roller
 ===========
 
+This is a PSR compatible fork from https://github.com/ringmaster/dicecalc
+
 How to use
 ----------
 Create a new Calc class, and pass the dice expression to the constructor::
