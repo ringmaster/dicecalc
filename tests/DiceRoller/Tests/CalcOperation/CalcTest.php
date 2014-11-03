@@ -21,6 +21,13 @@ class CalcTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $actual);
     }
 
+    /**
+     * @expectedException \Exception
+     */
+    public function testCalcUnknownOperator() {
+        CalcOperation::calc('?', 1, 2);
+    }
+
     public function dataForCalc()
     {
         return [
@@ -35,7 +42,6 @@ class CalcTest extends \PHPUnit_Framework_TestCase
             ['>', 5, 2, false],
             ['=', 2, 2, true],
             ['=', 3, 2, false],
-            ['?', 3, 2, null],
         ];
     }
 }

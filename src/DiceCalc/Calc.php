@@ -158,7 +158,11 @@ class Calc {
         }
     }
 
-    public function calc() {
+    /**
+     * @return mixed|string
+     * @throws \Exception
+     */
+    public function __invoke() {
 
         $stack = [];
 
@@ -166,8 +170,6 @@ class Calc {
             if (is_object($step) || !isset($this->ooo[$step])) {
                 $stack[] = $step;
             } else {
-                //echo "Operation: {$step}\n";
-                //print_r($stack);
                 $r1 = array_pop($stack);
                 $r2 = array_pop($stack);
 
@@ -180,11 +182,14 @@ class Calc {
                 if (is_numeric($r1) && $r2 instanceof CalcSet) {
                     $stack[] = $r2->rcalc($step, $r1);
                 }
+                if ($r1 instanceof CalcSet && $r2 instanceof CalcSet) {
+                    $stack[] = $r1->mcalc($step, $r2);
+                }
             }
         }
 
         if (count($stack) > 1) {
-            return 'Missing operator near "' . $stack[1] . '".';
+            throw new \Exception('Missing operator near "' . $stack[1] . '".');
         } else {
             $out = reset($stack);
 

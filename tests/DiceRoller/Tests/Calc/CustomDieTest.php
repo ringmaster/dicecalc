@@ -18,7 +18,7 @@ class CustomDieTest extends \PHPUnit_Framework_TestCase
         do {
             $calc = new Calc($expression);
 
-            $result = $calc->calc();
+            $result = $calc();
 
             $this->assertTrue(is_numeric($result));
 
@@ -78,7 +78,7 @@ class CustomDieTest extends \PHPUnit_Framework_TestCase
         do {
             $calc = new Calc($expression);
 
-            $result = $calc->calc();
+            $result = $calc();
 
             $this->assertInstanceOf('DiceCalc\CalcDice', $result);
 

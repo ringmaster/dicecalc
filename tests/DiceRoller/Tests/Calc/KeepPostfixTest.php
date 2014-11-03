@@ -23,7 +23,7 @@ class KeepPostfixTest extends \PHPUnit_Framework_TestCase
 
             $calc = new Calc($expression);
 
-            $result = $calc->calc();
+            $result = $calc();
 
             $this->assertTrue(
                 is_numeric($result),
@@ -68,7 +68,7 @@ class KeepPostfixTest extends \PHPUnit_Framework_TestCase
 
             $calc = new Calc($expression);
 
-            $result = $calc->calc();
+            $result = $calc();
 
             $this->assertTrue(
                 is_numeric($result),

@@ -47,7 +47,7 @@ $expression = isset($_GET['expression']) ? $_GET['expression'] : '';
   echo htmlspecialchars( $expression ) . "\n";
   echo $calc->infix();
   echo " => ";
-  echo $calc->calc() . "\n";
+  echo $calc() . "\n";
 
   ?>
 </pre>

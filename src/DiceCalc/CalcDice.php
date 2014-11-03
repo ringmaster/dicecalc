@@ -11,11 +11,11 @@ namespace DiceCalc;
  */
 class CalcDice extends CalcSet
 {
-    public function __construct($v)
+    public function __construct($set_value)
     {
         $this->values = [];
-        $this->label = $v;
-        preg_match('/' . Calc::DICE_REGEX . '/ix', $v, $matches);
+        $this->label = $set_value;
+        preg_match('/' . Calc::DICE_REGEX . '/ix', $set_value, $matches);
         if (intval($matches['multiple']) == 0 && $matches['multiple'] != '0') {
             $matches['multiple'] = 1;
         }
@@ -63,7 +63,7 @@ class CalcDice extends CalcSet
                     }
                 }
                 $newval = new Calc(implode('+', $addvals));
-                $newval = $newval->calc();
+                $newval = $newval();
             }
 
             if ($keep) {
@@ -76,8 +76,8 @@ class CalcDice extends CalcSet
         if ($matches['keep'] != '') {
             $gtlt = $matches['keepeval'];
             $range = intval($matches['keeprange']);
-            foreach ($this->values as $k => $v) {
-                $av = $v instanceof Calc ? $v->calc() : $v;
+            foreach ($this->values as $k => $set_value) {
+                $av = $set_value instanceof Calc ? $set_value() : $set_value;
                 if ($gtlt == '>' && $av <= $range) {
                     unset($this->values[$k]);
                 }
@@ -130,7 +130,7 @@ class CalcDice extends CalcSet
                 $out[] = $vout;
             } else {
                 if ($vout instanceof Calc) {
-                    $out[] = '<s>' . $vout->calc() . '</s>';
+                    $out[] = '<s>' . $vout() . '</s>';
                 } else {
                     $out[] = '<s>' . $vout . '</s>';
                 }
@@ -141,7 +141,7 @@ class CalcDice extends CalcSet
         $comma = '';
         foreach ($out as $o) {
             if ($o instanceof Calc) {
-                $result .= $comma . $o->calc();
+                $result .= $comma . $o();
             } else {
                 $result .= $comma . $o;
             }

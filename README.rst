@@ -20,7 +20,7 @@ Output the interpretation of the roll::
 	echo $calc->infix();
 
 Output the result of the roll::
-	echo $calc->calc();
+	echo $calc();
 
 Dice Expressions
 ----------------

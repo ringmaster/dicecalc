@@ -1,6 +1,7 @@
 <?php
 
 namespace DiceCalc;
+use Symfony\Component\Config\Definition\Exception\Exception;
 
 /**
  * Class CalcOperation
@@ -12,10 +13,12 @@ namespace DiceCalc;
 class CalcOperation
 {
     /**
-     * @param  string       $operator
+     * @param  string $operator
      * @param $operand2
      * @param $operand1
-     * @return bool|numeric
+     *
+     * @throws \Exception
+     * @return bool|number
      */
     public static function calc($operator, $operand2, $operand1)
     {
@@ -36,156 +39,167 @@ class CalcOperation
                 return self::lessthan($operand1, $operand2);
             case '=':
                 return self::equalto($operand1, $operand2);
+            default:
+                throw new \Exception('Unknown operator "' . $operator . '".');
         }
     }
 
     /**
-     * @param $r
-     * @return numeric|string
+     * @param $operand
+     *
+     * @return number|string
      * @throws \Exception
      */
-    public static function reduce($r)
+    public static function reduce($operand)
     {
-        if ($r instanceof Calc) {
-            return $r->calc();
+        if ($operand instanceof Calc) {
+            return $operand();
         }
-        if (is_numeric($r)) {
-            return $r;
+        if (is_numeric($operand)) {
+            return $operand;
         }
         throw new \Exception('This is not a number');
     }
 
     /**
-     * @param  numeric      $r1
-     * @param  numeric      $r2
-     * @return bool|numeric
-     */
-    public static function add($r1, $r2)
-    {
-        if (!is_numeric($r1)) {
-            try {
-                $r1 = self::reduce($r1);
-            } catch (\Exception $e) {
-                return false;
-            }
-        }
-
-        if (!is_numeric($r2)) {
-            try {
-                $r2 = self::reduce($r2);
-            } catch (\Exception $e) {
-                return false;
-            }
-        }
-
-        return $r1 + $r2;
-    }
-
-    /**
-     * @param  numeric      $r1
-     * @param  numeric      $r2
-     * @return bool|numeric
-     */
-    public static function multiply($r1, $r2)
-    {
-        if (is_numeric($r1) && is_numeric($r2)) {
-            return $r1 * $r2;
-        }
-
-        return false;
-    }
-
-    /**
-     * @param  numeric      $r1
-     * @param  numeric      $r2
-     * @return bool|numeric
-     */
-    public static function subtract($r1, $r2)
-    {
-        if (is_numeric($r1) && is_numeric($r2)) {
-            return $r1 - $r2;
-        }
-
-        return false;
-    }
-
-    /**
-     * @param  numeric    $r1
-     * @param  numeric    $r2
-     * @return bool|float
-     */
-    public static function divide($r1, $r2)
-    {
-        if (is_numeric($r1) && is_numeric($r2)) {
-            return $r1 / $r2;
-        }
-
-        return false;
-    }
-
-    /**
-     * @param  number      $r1
-     * @param  number      $r2
+     * @param  number      $operand1
+     * @param  number      $operand2
+     *
      * @return bool|number
      */
-    public static function exponent($r1, $r2)
+    public static function add($operand1, $operand2)
     {
-        if (is_numeric($r1) && is_numeric($r2)) {
-            return pow($r1, $r2);
+        if (!is_numeric($operand1)) {
+            try {
+                $operand1 = self::reduce($operand1);
+            } catch (\Exception $e) {
+                return false;
+            }
+        }
+
+        if (!is_numeric($operand2)) {
+            try {
+                $operand2 = self::reduce($operand2);
+            } catch (\Exception $e) {
+                return false;
+            }
+        }
+
+        return $operand1 + $operand2;
+    }
+
+    /**
+     * @param  number      $operand1
+     * @param  number      $operand2
+     *
+     * @return bool|number
+     */
+    public static function multiply($operand1, $operand2)
+    {
+        if (is_numeric($operand1) && is_numeric($operand2)) {
+            return $operand1 * $operand2;
         }
 
         return false;
     }
 
     /**
-     * @param  number $r1
-     * @param  number $r2
-     * @return bool
+     * @param  number      $operand1
+     * @param  number      $operand2
+     *
+     * @return bool|number
      */
-    public static function greaterthan($r1, $r2)
+    public static function subtract($operand1, $operand2)
     {
-        if (!is_numeric($r1)) {
-            try {
-                $r1 = self::reduce($r1);
-            } catch (\Exception $e) {
-                return false;
-            }
-        }
-
-        if (!is_numeric($r2)) {
-            try {
-                $r2 = self::reduce($r2);
-            } catch (\Exception $e) {
-                return false;
-            }
-        }
-
-        return $r1 > $r2;
-    }
-
-    /**
-     * @param  number $r1
-     * @param  number $r2
-     * @return bool
-     */
-    public static function lessthan($r1, $r2)
-    {
-        if (is_numeric($r1) && is_numeric($r2)) {
-            return ($r1 < $r2);
+        if (is_numeric($operand1) && is_numeric($operand2)) {
+            return $operand1 - $operand2;
         }
 
         return false;
     }
 
     /**
-     * @param  number $r1
-     * @param  number $r2
+     * @param  number    $operand1
+     * @param  number    $operand2
+     *
+     * @return bool|number
+     */
+    public static function divide($operand1, $operand2)
+    {
+        if (is_numeric($operand1) && is_numeric($operand2)) {
+            return $operand1 / $operand2;
+        }
+
+        return false;
+    }
+
+    /**
+     * @param  number      $operand1
+     * @param  number      $operand2
+     *
+     * @return bool|number
+     */
+    public static function exponent($operand1, $operand2)
+    {
+        if (is_numeric($operand1) && is_numeric($operand2)) {
+            return pow($operand1, $operand2);
+        }
+
+        return false;
+    }
+
+    /**
+     * @param  number $operand1
+     * @param  number $operand2
+     *
      * @return bool
      */
-    public static function equalto($r1, $r2)
+    public static function greaterthan($operand1, $operand2)
     {
-        if (is_numeric($r1) && is_numeric($r2)) {
-            return ($r1 == $r2);
+        if (!is_numeric($operand1)) {
+            try {
+                $operand1 = self::reduce($operand1);
+            } catch (\Exception $e) {
+                return false;
+            }
+        }
+
+        if (!is_numeric($operand2)) {
+            try {
+                $operand2 = self::reduce($operand2);
+            } catch (\Exception $e) {
+                return false;
+            }
+        }
+
+        return $operand1 > $operand2;
+    }
+
+    /**
+     * @param  number $operand1
+     * @param  number $operand2
+     *
+     * @return bool
+     */
+    public static function lessthan($operand1, $operand2)
+    {
+        if (is_numeric($operand1) && is_numeric($operand2)) {
+            return ($operand1 < $operand2);
+        }
+
+        return false;
+    }
+
+    /**
+     * @param  number $operand1
+     * @param  number $operand2
+     *
+     * @return bool
+     */
+    public static function equalto($operand1, $operand2)
+    {
+        if (is_numeric($operand1) && is_numeric($operand2)) {
+            return ($operand1 == $operand2);
         }
 
         return false;

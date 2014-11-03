@@ -15,7 +15,7 @@ class BasicRollTest extends \PHPUnit_Framework_TestCase
         for ($i = 0; $i < 100; $i++) {
             $calc = new Calc($expression);
 
-            $result = $calc->calc();
+            $result = $calc();
 
             $this->assertTrue(
                 is_numeric($result),
