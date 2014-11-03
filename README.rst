@@ -1,6 +1,15 @@
-===========
-Dice Roller
-===========
+========
+DiceCalc
+========
+
+Project status
+--------------
+
+.. image:: https://travis-ci.org/ringmaster/dicecalc.svg?branch=master
+	:target: https://travis-ci.org/ringmaster/dicecalc
+
+.. image:: https://scrutinizer-ci.com/g/ringmaster/dicecalc/badges/quality-score.png?b=master
+	:target: https://scrutinizer-ci.com/g/ringmaster/dicecalc/?branch=master
 
 How to use
 ----------

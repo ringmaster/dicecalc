@@ -1,0 +1,28 @@
+{
+    "name": "ringmaster/dicecalc",
+    "description": "DiceCalc",
+    "version": "1.0.0",
+    "keywords": ["dice", "dice calc", "dice calculator", "dice roller"],
+    "require-dev": {
+        "phpunit/phpunit": "@stable",
+        "fabpot/php-cs-fixer": "@stable",
+        "phpmd/phpmd": "@stable",
+        "phploc/phploc": "@stable",
+        "pdepend/pdepend": "@stable",
+        "sebastian/phpcpd": "@stable",
+        "sebastian/phpdcd": "@stable",
+        "squizlabs/php_codesniffer": "@stable"
+    },
+    "authors": [
+        {
+            "name": "Owen Winkler",
+            "email": "a_github@midnightcircus.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3"
+    },
+    "autoload": {
+        "psr-0": { "DiceCalc\\": "src/" }
+    }
+}
