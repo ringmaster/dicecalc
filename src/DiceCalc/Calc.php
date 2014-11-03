@@ -9,8 +9,7 @@ namespace DiceCalc;
  * @author  Owen Winkler <epithet@gmail.com>
  * @license MIT http://opensource.org/licenses/MIT
  */
-class Calc
-{
+class Calc {
 
     const DICE_REGEX = '(?P<multiple>\d*)d(?P<dietype>\d+|f|\%|\[[^\]]+\])
 (
@@ -45,81 +44,121 @@ class Calc
     protected $rpn = [];
     protected $infix = [];
 
-	/**
+    protected $stack = [];
+
+    /**
      * Create a dice calculation
+     *
      * @param string $expression An expression to calculate
      */
-    public function __construct($expression = '')
-    {
+    public function __construct($expression = '') {
         $this->expression = str_replace(' ', '', $expression);
 
         preg_match_all('%(?:
-    (?P<dice>' . self::DICE_REGEX . ')
-    |
-    (?P<set>\d*\[[^\]]+\])
-    |
-    (?P<numeral>[\d\.]+)
-    |
-    (?P<operator>[+\-*^><=/])
-    |
-    (?P<variable>\$[a-z_]+)
-    |
-    (?P<parens>[()])
-)%ix', $this->expression, $matches, PREG_SET_ORDER);
+            (?P<dice>' . self::DICE_REGEX . ')
+            |
+            (?P<set>\d*\[[^\]]+\])
+            |
+            (?P<numeral>[\d\.]+)
+            |
+            (?P<operator>[+\-*^><=/])
+            |
+            (?P<variable>\$[a-z_]+)
+            |
+            (?P<parens>[()])
+        )%ix', $this->expression, $matches, PREG_SET_ORDER);
 
-        $stack = [];
+        $this->stack = [];
 
         foreach ($matches as $match) {
-            $match = array_filter($match, function ($value) { return $value !== false && $value !== ''; });
+            $match = array_filter($match, function ($value) {
+                return $value !== false && $value !== '';
+            });
 
             if (isset($match['numeral'])) {
-                $this->rpn[] = $match['numeral'];
-                $this->infix[] = $match['numeral'];
+                $this->match_numeral($match['numeral']);
             } elseif (isset($match['dice'])) {
-                $dice = new CalcDice($match['dice']);
-                $this->rpn[] = $dice->value();
-                $this->infix[] = $dice;
+                $this->match_dice($match['dice']);
             } elseif (isset($match['set'])) {
-                $this->rpn[] = new CalcSet($match['set']);
-                $this->infix[] = end($this->rpn);
+                $this->match_set($match['set']);
             } elseif (isset($match['operator'])) {
-                while (
-                    count($stack) > 0
-                    &&
-                    end($stack) != '('
-                    &&
-                    $this->ooo[$match['operator']] <= $this->ooo[end($stack)]
-                ) {
-                    $this->rpn[] = array_pop($stack);
-                }
-                $stack[] = $match['operator'];
-                $this->infix[] = $match['operator'];
+                $this->match_operator($match['operator']);
             } elseif (isset($match['variable'])) {
-                $this->rpn[] = $match['variable'];
-                $this->infix[] = end($this->rpn);
+                $this->match_variable($match['variable']);
             } elseif (isset($match['parens'])) {
-                $this->infix[] = $match['parens'];
-                if ($match['parens'] == '(') {
-                    $stack[] = $match['parens'];
-                } else {
-                    while (count($stack) > 0 && end($stack) != '(') {
-                        $this->rpn[] = array_pop($stack);
-                    }
-                    array_pop($stack);
-                }
+                $this->match_parens($match['parens']);
             } else {
-                $stack = ['Invalid token:', $match];
+                $this->stack = ['Invalid token:', $match];
                 break;
             }
         }
 
-        while (count($stack) > 0) {
-            $this->rpn[] = array_pop($stack);
+        $this->clear_stack();
+    }
+
+    /**
+     * @param int $numeral Numeral to add to the RPN stack
+     */
+    protected function match_numeral($numeral) {
+        $this->rpn[]   = $numeral;
+        $this->infix[] = $numeral;
+    }
+
+    protected function match_dice($dice) {
+        $dice          = new CalcDice($dice);
+        $this->rpn[]   = $dice->value();
+        $this->infix[] = $dice;
+    }
+
+    protected function match_set($set) {
+        $this->rpn[]   = new CalcSet($set);
+        $this->infix[] = end($this->rpn);
+    }
+
+    /**
+     * @param $variable
+     */
+    protected function match_variable($variable) {
+        $this->rpn[]   = $variable;
+        $this->infix[] = end($this->rpn);
+    }
+
+    protected function match_parens($parenthesis) {
+        $this->infix[] = $parenthesis;
+        if ($parenthesis == '(') {
+            $this->stack[] = $parenthesis;
+        } else {
+            while (count($this->stack) > 0 && end($this->stack) != '(') {
+                $this->rpn[] = array_pop($this->stack);
+            }
+            array_pop($this->stack);
         }
     }
 
-    public function calc()
-    {
+    /**
+     * @param $operator
+     */
+    protected function match_operator($operator) {
+        while (
+            count($this->stack) > 0
+            &&
+            end($this->stack) != '('
+            &&
+            $this->ooo[$operator] <= $this->ooo[end($this->stack)]
+        ) {
+            $this->rpn[] = array_pop($this->stack);
+        }
+        $this->stack[] = $operator;
+        $this->infix[] = $operator;
+    }
+
+    protected function clear_stack() {
+        while (count($this->stack) > 0) {
+            $this->rpn[] = array_pop($this->stack);
+        }
+    }
+
+    public function calc() {
 
         $stack = [];
 
@@ -153,8 +192,8 @@ class Calc
         }
     }
 
-    public function infix()
-    {
+    public function infix() {
         return implode(' ', $this->infix);
     }
+
 }
