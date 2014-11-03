@@ -61,6 +61,15 @@ Basic math operations are possible as expressions.
 (4+4)*5
 	Add 4+4, then multiply by 5
 
+Math on sets of numbers.
+
+*Examples:*
+
+2*[3,4]
+	Multiply 2*3 and 2*4, resulting in a set [6,8]
+[1,2]*[3,4]
+	Multiply these sets together, resulting in a nested set [[3,4],[6,8]]
+
 Any combination of dice or constants in an expressions.  
 
 *Examples:*
