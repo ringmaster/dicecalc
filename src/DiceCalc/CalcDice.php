@@ -1,18 +1,25 @@
 <?php
 
-namespace DiceRoller;
+namespace DiceCalc;
 
+/**
+ * Class CalcDice
+ *
+ * @package DiceCalc
+ * @author  Owen Winkler <epithet@gmail.com>
+ * @license MIT http://opensource.org/licenses/MIT
+ */
 class CalcDice extends CalcSet
 {
     public function __construct($v)
     {
-        $this->values = array();
+        $this->values = [];
         $this->label = $v;
-        preg_match('/' . Calc::DICE_REGEX . '/i', $v, $matches);
+        preg_match('/' . Calc::DICE_REGEX . '/ix', $v, $matches);
         if (intval($matches['multiple']) == 0 && $matches['multiple'] != '0') {
             $matches['multiple'] = 1;
         }
-        $matches += array('matches'=>'', 'openroll' => '', 'reroll' => '', 'keep' => '');
+        $matches += ['matches'=>'', 'openroll' => '', 'reroll' => '', 'keep' => ''];
         for ($z = 0; $z < $matches['multiple']; $z++) {
             $keep = true;
 
@@ -34,7 +41,7 @@ class CalcDice extends CalcSet
             if ($matches['openroll'] != '') {
                 $gtlt = $matches['openrolleval'];
                 $range = intval($matches['openrolllimit']);
-                $addvals = array($newval);
+                $addvals = [$newval];
                 $addval = $newval;
 
                 if ($gtlt == '<') {
@@ -110,7 +117,7 @@ class CalcDice extends CalcSet
 
     public function __toString()
     {
-        $out = array();
+        $out = [];
         foreach ($this->saved_values as $key => $value) {
             $vout = $this->saved_values[$key];
             if ($vout === true) {

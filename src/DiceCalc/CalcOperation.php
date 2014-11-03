@@ -1,11 +1,18 @@
 <?php
 
-namespace DiceRoller;
+namespace DiceCalc;
 
+/**
+ * Class CalcOperation
+ *
+ * @package DiceCalc
+ * @author  Owen Winkler <epithet@gmail.com>
+ * @license MIT http://opensource.org/licenses/MIT
+ */
 class CalcOperation
 {
     /**
-     * @param string $operator
+     * @param  string       $operator
      * @param $operand2
      * @param $operand1
      * @return bool|numeric
@@ -49,8 +56,8 @@ class CalcOperation
     }
 
     /**
-     * @param numeric $r1
-     * @param numeric $r2
+     * @param  numeric      $r1
+     * @param  numeric      $r2
      * @return bool|numeric
      */
     public static function add($r1, $r2)
@@ -75,8 +82,8 @@ class CalcOperation
     }
 
     /**
-     * @param numeric $r1
-     * @param numeric $r2
+     * @param  numeric      $r1
+     * @param  numeric      $r2
      * @return bool|numeric
      */
     public static function multiply($r1, $r2)
@@ -89,8 +96,8 @@ class CalcOperation
     }
 
     /**
-     * @param numeric $r1
-     * @param numeric $r2
+     * @param  numeric      $r1
+     * @param  numeric      $r2
      * @return bool|numeric
      */
     public static function subtract($r1, $r2)
@@ -103,8 +110,8 @@ class CalcOperation
     }
 
     /**
-     * @param numeric $r1
-     * @param numeric $r2
+     * @param  numeric    $r1
+     * @param  numeric    $r2
      * @return bool|float
      */
     public static function divide($r1, $r2)
@@ -117,8 +124,8 @@ class CalcOperation
     }
 
     /**
-     * @param number $r1
-     * @param number $r2
+     * @param  number      $r1
+     * @param  number      $r2
      * @return bool|number
      */
     public static function exponent($r1, $r2)
@@ -131,8 +138,8 @@ class CalcOperation
     }
 
     /**
-     * @param number $r1
-     * @param number $r2
+     * @param  number $r1
+     * @param  number $r2
      * @return bool
      */
     public static function greaterthan($r1, $r2)
@@ -157,8 +164,8 @@ class CalcOperation
     }
 
     /**
-     * @param number $r1
-     * @param number $r2
+     * @param  number $r1
+     * @param  number $r2
      * @return bool
      */
     public static function lessthan($r1, $r2)
@@ -171,8 +178,8 @@ class CalcOperation
     }
 
     /**
-     * @param number $r1
-     * @param number $r2
+     * @param  number $r1
+     * @param  number $r2
      * @return bool
      */
     public static function equalto($r1, $r2)

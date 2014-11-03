@@ -10,8 +10,8 @@
          bootstrap="./tests/bootstrap.php"
         >
     <testsuites>
-        <testsuite name="Dice Roller Test Suite">
-            <directory>./tests/DiceRoller/Tests</directory>
+        <testsuite name="DiceCalc Test Suite">
+            <directory>./tests/DiceCalc/Tests</directory>
         </testsuite>
     </testsuites>
 </phpunit>

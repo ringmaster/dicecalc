@@ -1,7 +1,7 @@
 <?php
-namespace DiceRoller\Tests\CalcOperation;
+namespace DiceCalc\Tests\CalcOperation;
 
-use \DiceRoller\CalcOperation;
+use \DiceCalc\CalcOperation;
 
 class CalcTest extends \PHPUnit_Framework_TestCase
 {
@@ -23,19 +23,19 @@ class CalcTest extends \PHPUnit_Framework_TestCase
 
     public function dataForCalc()
     {
-        return array(
-            array('+', 2, 5, 7),
-            array('*', 2, 5, 10),
-            array('-', 2, 5, 3),
-            array('/', 2, 5, 2.5),
-            array('^', 2, 5, 25),
-            array('>', 2, 5, true),
-            array('<', 2, 5, false),
-            array('<', 5, 2, true),
-            array('>', 5, 2, false),
-            array('=', 2, 2, true),
-            array('=', 3, 2, false),
-            array('?', 3, 2, null),
-        );
+        return [
+            ['+', 2, 5, 7],
+            ['*', 2, 5, 10],
+            ['-', 2, 5, 3],
+            ['/', 2, 5, 2.5],
+            ['^', 2, 5, 25],
+            ['>', 2, 5, true],
+            ['<', 2, 5, false],
+            ['<', 5, 2, true],
+            ['>', 5, 2, false],
+            ['=', 2, 2, true],
+            ['=', 3, 2, false],
+            ['?', 3, 2, null],
+        ];
     }
 }

@@ -1,6 +1,6 @@
 {
-    "name": "sergej-kurakin/diceroller",
-    "description": "Dice Roller, PSR compatible fork from https://github.com/ringmaster/dicecalc ",
+    "name": "ringmaster/dicecalc",
+    "description": "DiceCalc",
     "version": "1.0.0",
     "keywords": ["dice", "dice calc", "dice calculator", "dice roller"],
     "require-dev": {
@@ -23,6 +23,6 @@
         "php": ">=5.3.3"
     },
     "autoload": {
-        "psr-0": { "DiceRoller\\": "src/" }
+        "psr-0": { "DiceCalc\\": "src/" }
     }
 }

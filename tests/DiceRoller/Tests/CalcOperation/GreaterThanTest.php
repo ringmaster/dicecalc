@@ -1,7 +1,7 @@
 <?php
-namespace DiceRoller\Tests\CalcOperation;
+namespace DiceCalc\Tests\CalcOperation;
 
-use DiceRoller\CalcOperation;
+use DiceCalc\CalcOperation;
 
 class GreaterThanTest extends \PHPUnit_Framework_TestCase
 {
@@ -22,14 +22,14 @@ class GreaterThanTest extends \PHPUnit_Framework_TestCase
 
     public function dataForGreaterThan()
     {
-        return array(
-            array(2, 1, true),
-            array('2', 1, true),
-            array(2, '1', true),
-            array('2', '1', true),
-            array('a2', 1, false),
-            array(2, 'a1', false),
-            array('a2', 'a2', false),
-        );
+        return [
+            [2, 1, true],
+            ['2', 1, true],
+            [2, '1', true],
+            ['2', '1', true],
+            ['a2', 1, false],
+            [2, 'a1', false],
+            ['a2', 'a2', false],
+        ];
     }
 }

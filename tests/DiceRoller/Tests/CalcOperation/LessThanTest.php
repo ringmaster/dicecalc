@@ -1,7 +1,7 @@
 <?php
-namespace DiceRoller\Tests\CalcOperation;
+namespace DiceCalc\Tests\CalcOperation;
 
-use DiceRoller\CalcOperation;
+use DiceCalc\CalcOperation;
 
 class LessThanTest extends \PHPUnit_Framework_TestCase
 {
@@ -22,14 +22,14 @@ class LessThanTest extends \PHPUnit_Framework_TestCase
 
     public function dataForLessThan()
     {
-        return array(
-            array(1, 2, true),
-            array('1', 2, true),
-            array(1, '2', true),
-            array('1', '2', true),
-            array('a1', 2, false),
-            array(1, 'a2', false),
-            array('a1', 'a2', false),
-        );
+        return [
+            [1, 2, true],
+            ['1', 2, true],
+            [1, '2', true],
+            ['1', '2', true],
+            ['a1', 2, false],
+            [1, 'a2', false],
+            ['a1', 'a2', false],
+        ];
     }
 }

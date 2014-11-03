@@ -1,7 +1,7 @@
 <?php
-namespace DiceRoller\Tests\CalcOperation;
+namespace DiceCalc\Tests\CalcOperation;
 
-use \DiceRoller\CalcOperation;
+use \DiceCalc\CalcOperation;
 
 class ExponentTest extends \PHPUnit_Framework_TestCase
 {
@@ -22,14 +22,14 @@ class ExponentTest extends \PHPUnit_Framework_TestCase
 
     public function dataForExponent()
     {
-        return array(
-            array(2, 8, 256),
-            array('2', 8, 256),
-            array(2, '8', 256),
-            array('2', '8', 256),
-            array('a2', 8, false),
-            array(2, 'a8', false),
-            array('2a', '8a', false),
-        );
+        return [
+            [2, 8, 256],
+            ['2', 8, 256],
+            [2, '8', 256],
+            ['2', '8', 256],
+            ['a2', 8, false],
+            [2, 'a8', false],
+            ['2a', '8a', false],
+        ];
     }
 }

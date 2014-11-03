@@ -1,13 +1,36 @@
 <?php
 
-namespace DiceRoller;
+namespace DiceCalc;
 
+/**
+ * Class Calc
+ *
+ * @package DiceCalc
+ * @author  Owen Winkler <epithet@gmail.com>
+ * @license MIT http://opensource.org/licenses/MIT
+ */
 class Calc
 {
 
-    const DICE_REGEX = '(?P<multiple>\d*)d(?P<dietype>\d+|f|\%|\[[^\]]+\])((?P<keep>k(?:eep)?(?P<keepeval>[<>])(?P<keeprange>\d+))|(?P<lowest>l(?:owest)?(?P<lowdice>\d+))|(?P<highest>h(?:ighest)?(?P<highdice>\d+))|(?P<reroll>r(?:eroll)?(?P<rerolleval>[<>])(?P<rerolllimit>\d+))|(?P<openroll>o(?:pen)?(?P<openrolleval>[<>=])(?P<openrolllimit>\d+))|(?P<flags>[z]+))*';
+    const DICE_REGEX = '(?P<multiple>\d*)d(?P<dietype>\d+|f|\%|\[[^\]]+\])
+(
+(?P<keep>k(?:eep)?(?P<keepeval>[<>])(?P<keeprange>\d+))
+|
+(?P<lowest>l(?:owest)?(?P<lowdice>\d+))
+|
+(?P<highest>h(?:ighest)?(?P<highdice>\d+))
+|
+(?P<reroll>r(?:eroll)?(?P<rerolleval>[<>])(?P<rerolllimit>\d+))
+|
+(?P<openroll>o(?:pen)?(?P<openrolleval>[<>=])(?P<openrolllimit>\d+))
+|
+(?P<flags>[z]+)
+)*';
 
-    private $ooo = array(
+    /**
+     * @var array $ooo A list of operators with comparative order of operations
+     */
+    private $ooo = [
         '>' => 0,
         '<' => 0,
         '=' => 0,
@@ -16,22 +39,38 @@ class Calc
         '*' => 20,
         '/' => 20,
         '^' => 30,
-    );
+    ];
 
     protected $expression;
-    protected $rpn = array();
-    protected $infix = array();
+    protected $rpn = [];
+    protected $infix = [];
 
+	/**
+     * Create a dice calculation
+     * @param string $expression An expression to calculate
+     */
     public function __construct($expression = '')
     {
         $this->expression = str_replace(' ', '', $expression);
 
-        preg_match_all('%(?:(?P<dice>' . self::DICE_REGEX . ')|(?P<set>\d*\[[^\]]+\])|(?P<numeral>[\d\.]+)|(?P<operator>[+\-*^><=/])|(?P<variable>\$[a-z_]+)|(?P<parens>[()]))%i', $this->expression, $matches, PREG_SET_ORDER);
+        preg_match_all('%(?:
+    (?P<dice>' . self::DICE_REGEX . ')
+    |
+    (?P<set>\d*\[[^\]]+\])
+    |
+    (?P<numeral>[\d\.]+)
+    |
+    (?P<operator>[+\-*^><=/])
+    |
+    (?P<variable>\$[a-z_]+)
+    |
+    (?P<parens>[()])
+)%ix', $this->expression, $matches, PREG_SET_ORDER);
 
-        $stack = array();
+        $stack = [];
 
         foreach ($matches as $match) {
-            $match = array_filter($match);
+            $match = array_filter($match, function ($value) { return $value !== false && $value !== ''; });
 
             if (isset($match['numeral'])) {
                 $this->rpn[] = $match['numeral'];
@@ -69,7 +108,7 @@ class Calc
                     array_pop($stack);
                 }
             } else {
-                $stack = array('Invalid token:', $match);
+                $stack = ['Invalid token:', $match];
                 break;
             }
         }
@@ -82,7 +121,7 @@ class Calc
     public function calc()
     {
 
-        $stack = array();
+        $stack = [];
 
         foreach ($this->rpn as $step) {
             if (is_object($step) || !isset($this->ooo[$step])) {

@@ -1,7 +1,7 @@
 <?php
-namespace DiceRoller\Tests\CalcOperation;
+namespace DiceCalc\Tests\CalcOperation;
 
-use \DiceRoller\CalcOperation;
+use \DiceCalc\CalcOperation;
 
 class SubtractTest extends \PHPUnit_Framework_TestCase
 {
@@ -22,14 +22,14 @@ class SubtractTest extends \PHPUnit_Framework_TestCase
 
     public function dataForSubtract()
     {
-        return array(
-            array(5, 2, 3),
-            array('5', 2, 3),
-            array(5, '2', 3),
-            array('5', '2', 3),
-            array('a5', 2, false),
-            array(5, 'a2', false),
-            array('a5', 'a2', false),
-        );
+        return [
+            [5, 2, 3],
+            ['5', 2, 3],
+            [5, '2', 3],
+            ['5', '2', 3],
+            ['a5', 2, false],
+            [5, 'a2', false],
+            ['a5', 'a2', false],
+        ];
     }
 }

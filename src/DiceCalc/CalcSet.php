@@ -1,10 +1,17 @@
 <?php
 
-namespace DiceRoller;
+namespace DiceCalc;
 
+/**
+ * Class CalcSet
+ *
+ * @package DiceCalc
+ * @author  Owen Winkler <epithet@gmail.com>
+ * @license MIT http://opensource.org/licenses/MIT
+ */
 class CalcSet
 {
-    protected $values = array();
+    protected $values = [];
     protected $label;
 
     public function __construct($v)
@@ -36,7 +43,7 @@ class CalcSet
     }
     public function __toString()
     {
-        $out = array();
+        $out = [];
         foreach ($this->saved_values as $key => $value) {
             $vout = $this->values[$key];
             if (!isset($this->values[$key])) {
@@ -61,7 +68,7 @@ class CalcSet
 
     public function calc($operator, $operand)
     {
-        $out = array();
+        $out = [];
         foreach ($this->values as $value) {
             $out[] = CalcOperation::calc($operator, $value, $operand);
         }
@@ -71,7 +78,7 @@ class CalcSet
 
     public function rcalc($operator, $operand)
     {
-        $out = array();
+        $out = [];
         foreach ($this->values as $value) {
             $out[] = CalcOperation::calc($operator, $operand, $value);
         }

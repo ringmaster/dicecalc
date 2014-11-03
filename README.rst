@@ -1,17 +1,15 @@
-===========
-Dice Roller
-===========
-
-This is a PSR compatible fork from https://github.com/ringmaster/dicecalc
+========
+DiceCalc
+========
 
 Project status
 --------------
 
-.. image:: https://travis-ci.org/sergej-kurakin/dicecalc.svg?branch=master
-    :target: https://travis-ci.org/sergej-kurakin/dicecalc
+.. image:: https://travis-ci.org/ringmaster/dicecalc.svg?branch=master
+	:target: https://travis-ci.org/ringmaster/dicecalc
 
-.. image:: https://scrutinizer-ci.com/g/sergej-kurakin/dicecalc/badges/quality-score.png?b=master
-    :target: https://scrutinizer-ci.com/g/sergej-kurakin/dicecalc/?branch=master
+.. image:: https://scrutinizer-ci.com/g/ringmaster/dicecalc/badges/quality-score.png?b=master
+	:target: https://scrutinizer-ci.com/g/ringmaster/dicecalc/?branch=master
 
 How to use
 ----------

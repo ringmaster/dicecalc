@@ -1,7 +1,7 @@
 <?php
-namespace DiceRoller\Tests\Calc;
+namespace DiceCalc\Tests\Calc;
 
-use DiceRoller\Calc;
+use DiceCalc\Calc;
 
 class MathTest extends \PHPUnit_Framework_TestCase
 {
@@ -19,25 +19,25 @@ class MathTest extends \PHPUnit_Framework_TestCase
 
     public function diceMathProvider()
     {
-        return array(
-            //array('0+0', 0),
-            array('1+1', 2),
-            //array('1+0', 1),
-            //array('0+1', 1),
-            array('10+1', 11),
-            array('1*1', 1),
-            array('1*2', 2),
-            array('2*1', 2),
-            array('4*5', 20),
-            array('4+4*5', 24),
-            array('(4+4)*5', 40),
-            array('(100+9)*40', 4360),
+        return [
+            ['0+0', 0],
+            ['1+1', 2],
+            ['1+0', 1],
+            ['0+1', 1],
+            ['10+1', 11],
+            ['1*1', 1],
+            ['1*2', 2],
+            ['2*1', 2],
+            ['4*5', 20],
+            ['4+4*5', 24],
+            ['(4+4)*5', 40],
+            ['(100+9)*40', 4360],
 
-            array('1-1', 0),
-            array('1-10', -9),
-            array('10-1', 9),
-            array('4-4*5', -16),
-            array('(4-4)*5', 0),
-        );
+            ['1-1', 0],
+            ['1-10', -9],
+            ['10-1', 9],
+            ['4-4*5', -16],
+            ['(4-4)*5', 0],
+        ];
     }
 }

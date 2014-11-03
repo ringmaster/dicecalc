@@ -1,7 +1,7 @@
 <?php
-namespace DiceRoller\Tests\CalcOperation;
+namespace DiceCalc\Tests\CalcOperation;
 
-use \DiceRoller\CalcOperation;
+use \DiceCalc\CalcOperation;
 
 class EqualToTest extends \PHPUnit_Framework_TestCase
 {
@@ -22,14 +22,14 @@ class EqualToTest extends \PHPUnit_Framework_TestCase
 
     public function dataForEqualTo()
     {
-        return array(
-            array(1, 1, true),
-            array('1', 1, true),
-            array(1, '1', true),
-            array('1', '1', true),
-            array('a1a', 1, false),
-            array(1, 'a1a', false),
-            array('a1a', 'a1a', false),
-        );
+        return [
+            [1, 1, true],
+            ['1', 1, true],
+            [1, '1', true],
+            ['1', '1', true],
+            ['a1a', 1, false],
+            [1, 'a1a', false],
+            ['a1a', 'a1a', false],
+        ];
     }
 }

@@ -1,7 +1,7 @@
 <?php
-namespace DiceRoller\Tests\Calc;
+namespace DiceCalc\Tests\Calc;
 
-use DiceRoller\Calc;
+use DiceCalc\Calc;
 
 class ConditionNumberTest extends \PHPUnit_Framework_TestCase
 {
@@ -20,19 +20,19 @@ class ConditionNumberTest extends \PHPUnit_Framework_TestCase
 
     public function diceMathConditionProvider()
     {
-        return array(
-            array('1+1 = 2', true),
-            array('3+8 = 11', true),
+        return [
+            ['1+1 = 2', true],
+            ['3+8 = 11', true],
 
-            array('1+1 > 1', true),
-            array('1+1 > 3', false),
+            ['1+1 > 1', true],
+            ['1+1 > 3', false],
 
-            array('1+1 < 1', false),
-            array('1+1 < 3', true),
+            ['1+1 < 1', false],
+            ['1+1 < 3', true],
 
-            array('4+4 > 7', true),
-            array('4+4 > 8', false),
-            array('4+4 > 9', false),
-        );
+            ['4+4 > 7', true],
+            ['4+4 > 8', false],
+            ['4+4 > 9', false],
+        ];
     }
 }

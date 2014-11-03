@@ -1,7 +1,7 @@
 <?php
-namespace DiceRoller\Tests\Calc;
+namespace DiceCalc\Tests\Calc;
 
-use DiceRoller\Calc;
+use DiceCalc\Calc;
 
 class LowestHighestTest extends \PHPUnit_Framework_TestCase
 {
@@ -30,10 +30,10 @@ class LowestHighestTest extends \PHPUnit_Framework_TestCase
 
     public function dataForLowestPostfix()
     {
-        return array(
-            array('2d20 lowest 2', 2, 2),
-            array('2d20l2', 2, 2)
-        );
+        return [
+            ['2d20 lowest 2', 2, 2],
+            ['2d20l2', 2, 2]
+        ];
     }
 
     /**
@@ -61,9 +61,9 @@ class LowestHighestTest extends \PHPUnit_Framework_TestCase
 
     public function dataForHighestPostfix()
     {
-        return array(
-            array('4d6 highest 3', 4, 1, 3),
-            array('4d6h3', 4, 1, 3)
-        );
+        return [
+            ['4d6 highest 3', 4, 1, 3],
+            ['4d6h3', 4, 1, 3]
+        ];
     }
 }

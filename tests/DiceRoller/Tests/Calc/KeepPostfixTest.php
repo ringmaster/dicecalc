@@ -1,7 +1,7 @@
 <?php
-namespace DiceRoller\Tests\Calc;
+namespace DiceCalc\Tests\Calc;
 
-use DiceRoller\Calc;
+use DiceCalc\Calc;
 
 class KeepPostfixTest extends \PHPUnit_Framework_TestCase
 {
@@ -45,10 +45,10 @@ class KeepPostfixTest extends \PHPUnit_Framework_TestCase
 
     public function dataForKeepPostfixGreaterThan()
     {
-        return array(
-            array('5d6 keep > 4', 5, 4, 6),
-            array('5d6k>4', 5, 4, 6)
-        );
+        return [
+            ['5d6 keep > 4', 5, 4, 6],
+            ['5d6k>4', 5, 4, 6]
+        ];
     }
 
     /**
@@ -90,10 +90,10 @@ class KeepPostfixTest extends \PHPUnit_Framework_TestCase
 
     public function dataForKeepPostfixLessThan()
     {
-        return array(
-            array('5d6 keep < 4', 5, 1, 3),
-            array('5d6k<4', 5, 1, 3)
-        );
+        return [
+            ['5d6 keep < 4', 5, 1, 3],
+            ['5d6k<4', 5, 1, 3]
+        ];
     }
 
 }

@@ -1,7 +1,7 @@
 <?php
-namespace DiceRoller\Tests\Calc;
+namespace DiceCalc\Tests\Calc;
 
-use DiceRoller\Calc;
+use DiceCalc\Calc;
 
 class TargetNumberTest extends \PHPUnit_Framework_TestCase
 {
@@ -27,23 +27,23 @@ class TargetNumberTest extends \PHPUnit_Framework_TestCase
 
     public function diceRollTargetProvider()
     {
-        return array(
-            array('d6 > 1'),
-            array('d6 > 3'),
-            array('d6 > 5'),
+        return [
+            ['d6 > 1'],
+            ['d6 > 3'],
+            ['d6 > 5'],
 
-            array('d6 < 2'),
-            array('d6 < 4'),
-            array('d6 < 6'),
+            ['d6 < 2'],
+            ['d6 < 4'],
+            ['d6 < 6'],
 
-            array('2d6 > 2'),
-            array('2d6 < 12'),
+            ['2d6 > 2'],
+            ['2d6 < 12'],
 
-            array('2d6+5 > 7'),
-            array('2d6+5 < 17'),
+            ['2d6+5 > 7'],
+            ['2d6+5 < 17'],
 
-            array('2d6-1 > 1'),
-            array('2d6-5 < 6'),
-        );
+            ['2d6-1 > 1'],
+            ['2d6-5 < 6'],
+        ];
     }
 }

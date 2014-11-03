@@ -1,7 +1,7 @@
 <?php
-namespace DiceRoller\Tests\Calc;
+namespace DiceCalc\Tests\Calc;
 
-use DiceRoller\Calc;
+use DiceCalc\Calc;
 
 class BasicRollWithMathTest extends \PHPUnit_Framework_TestCase
 {
@@ -34,31 +34,31 @@ class BasicRollWithMathTest extends \PHPUnit_Framework_TestCase
 
     public function diceRollProvider()
     {
-        return array(
-            array('d6+1', 2, 7),
-            array('1d6+1', 2, 7),
-            array('2d6+1', 3, 13),
-            array('3d6+3', 6, 21),
-            array('100d6+10', 110, 610),
+        return [
+            ['d6+1', 2, 7],
+            ['1d6+1', 2, 7],
+            ['2d6+1', 3, 13],
+            ['3d6+3', 6, 21],
+            ['100d6+10', 110, 610],
 
-            array('d20+5', 6, 26),
-            array('1d20+3', 4, 23),
-            array('2d20+4', 6, 44),
+            ['d20+5', 6, 26],
+            ['1d20+3', 4, 23],
+            ['2d20+4', 6, 44],
 
-            array('d%+3', 4, 104),
-            array('1d%+55', 56, 155),
+            ['d%+3', 4, 104],
+            ['1d%+55', 56, 155],
 
-            array('df+3', 2, 4),
-            array('1df+5', 4, 6),
-            array('2df+8', -6, 10),
-            array('6df+1', -5, 7),
-            array('100df+3', -97, 103),
+            ['df+3', 2, 4],
+            ['1df+5', 4, 6],
+            ['2df+8', -6, 10],
+            ['6df+1', -5, 7],
+            ['100df+3', -97, 103],
 
-            array('d6+d3', 2, 9),
-            array('1d6+1d3', 2, 9),
-            array('2d6+1d3', 3, 15),
-            array('1d6+2d3', 3, 12),
-            array('10d6+5d3', 15, 85),
-        );
+            ['d6+d3', 2, 9],
+            ['1d6+1d3', 2, 9],
+            ['2d6+1d3', 3, 15],
+            ['1d6+2d3', 3, 12],
+            ['10d6+5d3', 15, 85],
+        ];
     }
 }

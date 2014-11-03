@@ -1,7 +1,7 @@
 <?php
-namespace DiceRoller\Tests\Calc;
+namespace DiceCalc\Tests\Calc;
 
-use DiceRoller\Calc;
+use DiceCalc\Calc;
 
 class CustomDieTest extends \PHPUnit_Framework_TestCase
 {
@@ -13,7 +13,7 @@ class CustomDieTest extends \PHPUnit_Framework_TestCase
 
         $allFound = false;
         $i = 0;
-        $foundElements = array();
+        $foundElements = [];
 
         do {
             $calc = new Calc($expression);
@@ -47,16 +47,16 @@ class CustomDieTest extends \PHPUnit_Framework_TestCase
 
     public function customNumericDieProvider()
     {
-        return array(
-            array(
+        return [
+            [
                 'd[1,2,2,3,3,4]',
-                array(1, 2, 3, 4),
-            ),
-            array(
+                [1, 2, 3, 4],
+            ],
+            [
                 'd[2,4,6]',
-                array(2,4,6),
-            ),
-        );
+                [2,4,6],
+            ],
+        ];
     }
 
     /**
@@ -67,9 +67,9 @@ class CustomDieTest extends \PHPUnit_Framework_TestCase
 
         $allFound = false;
         $i = 0;
-        $foundElements = array();
+        $foundElements = [];
 
-        $checkValues = array();
+        $checkValues = [];
 
         foreach ($availableValues as $value) {
             $checkValues[] = '['.$expression.':'.$value.']';
@@ -80,7 +80,7 @@ class CustomDieTest extends \PHPUnit_Framework_TestCase
 
             $result = $calc->calc();
 
-            $this->assertInstanceOf('DiceRoller\CalcDice', $result);
+            $this->assertInstanceOf('DiceCalc\CalcDice', $result);
 
             $resultString = (string) $result->value();
 
@@ -109,15 +109,15 @@ class CustomDieTest extends \PHPUnit_Framework_TestCase
 
     public function customColorDieProvider()
     {
-        return array(
-            array(
+        return [
+            [
                 'd[red,green,blue,yellow]',
-                array('red', 'green', 'blue', 'yellow'),
-            ),
-            array(
+                ['red', 'green', 'blue', 'yellow'],
+            ],
+            [
                 'd[red,green,blue]',
-                array('red', 'green', 'blue'),
-            ),
-        );
+                ['red', 'green', 'blue'],
+            ],
+        ];
     }
 }

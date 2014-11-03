@@ -1,8 +1,8 @@
 <?php
-namespace DiceRoller\Tests\CalcOperation;
+namespace DiceCalc\Tests\CalcOperation;
 
-use DiceRoller\CalcOperation;
-use DiceRoller\Calc;
+use DiceCalc\CalcOperation;
+use DiceCalc\Calc;
 
 class ReduceTest extends \PHPUnit_Framework_TestCase
 {

@@ -1,7 +1,7 @@
 <?php
-namespace DiceRoller\Tests\Calc;
+namespace DiceCalc\Tests\Calc;
 
-use DiceRoller\Calc;
+use DiceCalc\Calc;
 
 class BasicRollTest extends \PHPUnit_Framework_TestCase
 {
@@ -34,25 +34,25 @@ class BasicRollTest extends \PHPUnit_Framework_TestCase
 
     public function basicRollProvider()
     {
-        return array(
-            array('d6', 1, 6),
-            array('1d6', 1, 6),
-            array('2d6', 2, 12),
-            array('3d6', 3, 18),
-            array('100d6', 100, 600),
+        return [
+            ['d6', 1, 6],
+            ['1d6', 1, 6],
+            ['2d6', 2, 12],
+            ['3d6', 3, 18],
+            ['100d6', 100, 600],
 
-            array('d20', 1, 20),
-            array('1d20', 1, 20),
-            array('2d20', 2, 40),
+            ['d20', 1, 20],
+            ['1d20', 1, 20],
+            ['2d20', 2, 40],
 
-            array('d%', 1, 100),
-            array('1d%', 1, 100),
+            ['d%', 1, 100],
+            ['1d%', 1, 100],
 
-            array('df', -1, 1),
-            array('1df', -1, 1),
-            array('2df', -2, 2),
-            array('6df', -6, 6),
-            array('100df', -100, 100),
-        );
+            ['df', -1, 1],
+            ['1df', -1, 1],
+            ['2df', -2, 2],
+            ['6df', -6, 6],
+            ['100df', -100, 100],
+        ];
     }
 }
