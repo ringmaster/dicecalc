@@ -99,17 +99,18 @@ class CalcDice extends CalcSet
     public function rolltype($dietype)
     {
         if (is_numeric($dietype)) {
-            $newval = rand(1, $dietype);
+            $newval = Random::get(1, $dietype);
         } elseif ($dietype == 'f') {
-            $newval = rand(-1, 1);
+            $newval = Random::get(-1, 1);
         } elseif ($dietype == '%') {
-            $newval = rand(1, 100);
+            $newval = Random::get(1, 100);
         } elseif ($dietype[0] == '[') {
             $dietype = trim($dietype, '[]');
             $opts = explode(',', $dietype);
-            $newval = $opts[rand(0, count($opts)-1)];
+            $newval = $opts[Random::get(0, count($opts)-1)];
         } else {
             var_dump($dietype);
+            $newval = 'unknown';
         }
 
         return $newval;
@@ -118,7 +119,7 @@ class CalcDice extends CalcSet
     public function __toString()
     {
         $out = [];
-        foreach ($this->saved_values as $key => $value) {
+        foreach (array_keys($this->saved_values) as $key) {
             $vout = $this->saved_values[$key];
             if ($vout === true) {
                 $vout = '<span class="true">true</span>';

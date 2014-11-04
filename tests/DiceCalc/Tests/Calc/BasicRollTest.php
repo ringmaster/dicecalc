@@ -11,25 +11,37 @@ class BasicRollTest extends \PHPUnit_Framework_TestCase
      */
     public function testBasicRollOfDice($expression, $left, $right)
     {
-        // I hope 100 of iterations is enough to test random
-        for ($i = 0; $i < 100; $i++) {
-            $calc = new Calc($expression);
+        $calc = new Calc($expression);
 
-            $result = $calc();
+        $result = $calc();
 
-            $this->assertTrue(
-                is_numeric($result),
-                sprintf('Calc::calc(%s) result is not numeric: %s', $expression, $result)
-            );
-            $this->assertTrue(
-                ($result >= $left),
-                sprintf('Calc::calc(%s) result %s is not not bigger or equal %d', $expression, $result, $left)
-            );
-            $this->assertTrue(
-                ($result <= $right),
-                sprintf('Calc::calc(%s) result %s is not not less or equal %d', $expression, $result, $right)
-            );
-        }
+        $this->assertTrue(
+            is_numeric($result),
+            sprintf('Calc::calc(%s) result is not numeric: %s', $expression, $result)
+        );
+
+
+        \DiceCalc\Random::$queue = function($min, $max) {
+            return $min;
+        };
+        $calc = new Calc($expression);
+        $result = $calc();
+        $this->assertTrue(
+            ($result == $left),
+            sprintf('Calc::calc(%s) result %s is not not bigger or equal %d', $expression, $result, $left)
+        );
+
+        \DiceCalc\Random::$queue = function($min, $max) {
+            return $max;
+        };
+        $calc = new Calc($expression);
+        $result = $calc();
+        $this->assertTrue(
+            ($result == $right),
+            sprintf('Calc::calc(%s) result %s is not not less or equal %d', $expression, $result, $right)
+        );
+
+        \DiceCalc\Random::$queue = null;
     }
 
     public function basicRollProvider()
