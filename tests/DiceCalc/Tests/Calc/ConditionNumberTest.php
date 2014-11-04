@@ -13,7 +13,7 @@ class ConditionNumberTest extends \PHPUnit_Framework_TestCase
     {
         $calc = new Calc($expression);
 
-        $result = $calc->calc();
+        $result = $calc();
 
         $this->assertEquals($expected, $result);
     }

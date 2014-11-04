@@ -16,7 +16,7 @@ class TargetNumberTest extends \PHPUnit_Framework_TestCase
         do {
             $calc = new Calc($expression);
 
-            $result = $calc->calc();
+            $result = $calc();
 
             $i++;
 
