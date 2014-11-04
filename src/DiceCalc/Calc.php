@@ -174,7 +174,7 @@ class Calc {
                 $r2 = array_pop($stack);
 
                 if (is_numeric($r1) && is_numeric($r2)) {
-                    $stack[] = CalcOperation::calc($step, $r1, $r2);
+                    $stack[] = CalcOperation::calc($step, $r2, $r1);
                 }
                 if ($r1 instanceof CalcSet && is_numeric($r2)) {
                     $stack[] = $r1->calc($step, $r2);

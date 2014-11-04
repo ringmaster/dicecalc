@@ -2,6 +2,7 @@
 namespace DiceCalc\Tests\Calc;
 
 use DiceCalc\Calc;
+use DiceCalc\Random;
 
 class BasicRollTest extends \PHPUnit_Framework_TestCase
 {
@@ -21,9 +22,7 @@ class BasicRollTest extends \PHPUnit_Framework_TestCase
         );
 
 
-        \DiceCalc\Random::$queue = function($min, $max) {
-            return $min;
-        };
+        Random::queue_min();
         $calc = new Calc($expression);
         $result = $calc();
         $this->assertTrue(
@@ -31,9 +30,7 @@ class BasicRollTest extends \PHPUnit_Framework_TestCase
             sprintf('Calc::calc(%s) result %s is not not bigger or equal %d', $expression, $result, $left)
         );
 
-        \DiceCalc\Random::$queue = function($min, $max) {
-            return $max;
-        };
+        Random::queue_max();
         $calc = new Calc($expression);
         $result = $calc();
         $this->assertTrue(
@@ -41,7 +38,7 @@ class BasicRollTest extends \PHPUnit_Framework_TestCase
             sprintf('Calc::calc(%s) result %s is not not less or equal %d', $expression, $result, $right)
         );
 
-        \DiceCalc\Random::$queue = null;
+        Random::clear_queue();
     }
 
     public function basicRollProvider()

@@ -15,7 +15,7 @@ class MultiplyTest extends \PHPUnit_Framework_TestCase
      */
     public function testMultiply($num1, $num2, $expected)
     {
-        $actual = CalcOperation::multiply($num1, $num2);
+        $actual = CalcOperation::calc('*', $num1, $num2);
 
         $this->assertSame($expected, $actual);
     }
@@ -27,9 +27,6 @@ class MultiplyTest extends \PHPUnit_Framework_TestCase
             ['5', 2, 10],
             [5, '2', 10],
             ['5', '2', 10],
-            ['a5', 2, false],
-            [5, 'a2', false],
-            ['a5', 'a2', false],
         ];
     }
 }

@@ -15,7 +15,7 @@ class SubtractTest extends \PHPUnit_Framework_TestCase
      */
     public function testSubtract($num1, $num2, $expected)
     {
-        $actual = CalcOperation::subtract($num1, $num2);
+        $actual = CalcOperation::calc('-', $num1, $num2);
 
         $this->assertSame($expected, $actual);
     }
@@ -27,9 +27,6 @@ class SubtractTest extends \PHPUnit_Framework_TestCase
             ['5', 2, 3],
             [5, '2', 3],
             ['5', '2', 3],
-            ['a5', 2, false],
-            [5, 'a2', false],
-            ['a5', 'a2', false],
         ];
     }
 }

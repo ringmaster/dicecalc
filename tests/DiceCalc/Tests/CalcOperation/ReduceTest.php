@@ -14,10 +14,12 @@ class ReduceTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(3, $actual);
     }
 
+    /**
+     * @throws \Exception
+     * @expectedException \Exception
+     */
     public function testReduceOnThrowingException()
     {
-        $this->setExpectedException('Exception');
-
         $param = new \stdClass();
 
         CalcOperation::reduce($param);

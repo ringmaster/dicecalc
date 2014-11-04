@@ -11,6 +11,7 @@ namespace DiceCalc;
 
 class Random {
     public static $queue = null;
+    public static $queue_list = [];
 
     public static function get($min, $max) {
         if(is_callable(self::$queue)) {
@@ -21,5 +22,33 @@ class Random {
             $result = rand($min, $max);
         }
         return $result;
+    }
+
+    public static function set_queue($queue) {
+        self::$queue = $queue;
+    }
+
+    public static function clear_queue() {
+        self::$queue = null;
+    }
+
+    public static function queue_up() {
+        $numbers = func_get_args();
+        self::$queue_list = self::$queue_list + $numbers;
+        self::set_queue(function($min, $max){
+                return array_shift(self::$queue_list);
+            });
+    }
+
+    public static function queue_min() {
+        self::set_queue(function($min, $max) {
+            return $min;
+        });
+    }
+
+    public static function queue_max() {
+        self::set_queue(function($min, $max) {
+            return $max;
+        });
     }
 } 

@@ -7,11 +7,9 @@ require 'src/DiceCalc/CalcOperation.php';
 
 use DiceCalc\Calc as Calc;
 
-$expression = $_GET['expression'];
+$expression = isset($_GET['expression']) ? $_GET['expression'] : '';
 
 $calc = new Calc( $expression );
-
-$expression = isset($_GET['expression']) ? $_GET['expression'] : '';
 
 
 ?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">

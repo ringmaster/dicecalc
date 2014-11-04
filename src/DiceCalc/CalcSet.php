@@ -67,7 +67,7 @@ class CalcSet {
     public function calc($operator, $operand) {
         $out = [];
         foreach ($this->values as $value) {
-            $out[] = CalcOperation::calc($operator, $value, $operand);
+            $out[] = CalcOperation::calc($operator, $operand, $value);
         }
 
         return new CalcSet($out);
@@ -76,7 +76,7 @@ class CalcSet {
     public function rcalc($operator, $operand) {
         $out = [];
         foreach ($this->values as $value) {
-            $out[] = CalcOperation::calc($operator, $operand, $value);
+            $out[] = CalcOperation::calc($operator, $value, $operand);
         }
 
         return new CalcSet($out);

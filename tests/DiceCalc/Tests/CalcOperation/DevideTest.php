@@ -15,7 +15,7 @@ class DivideTest extends \PHPUnit_Framework_TestCase
      */
     public function testDivide($num1, $num2, $expected)
     {
-        $actual = CalcOperation::divide($num1, $num2);
+        $actual = CalcOperation::calc('/', $num1, $num2);
 
         $this->assertSame($expected, $actual);
     }
@@ -27,9 +27,6 @@ class DivideTest extends \PHPUnit_Framework_TestCase
             ['5', 2, 2.5],
             [5, '2', 2.5],
             ['5', '2', 2.5],
-            ['a5', 2, false],
-            [5, 'a2', false],
-            ['a5', 'a2', false],
         ];
     }
 }

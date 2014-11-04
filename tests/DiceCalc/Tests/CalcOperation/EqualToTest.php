@@ -15,7 +15,7 @@ class EqualToTest extends \PHPUnit_Framework_TestCase
      */
     public function testEqualTo($num1, $num2, $expected)
     {
-        $actual = CalcOperation::equalto($num1, $num2);
+        $actual = CalcOperation::calc('=', $num1, $num2);
 
         $this->assertSame($expected, $actual);
     }
@@ -27,9 +27,6 @@ class EqualToTest extends \PHPUnit_Framework_TestCase
             ['1', 1, true],
             [1, '1', true],
             ['1', '1', true],
-            ['a1a', 1, false],
-            [1, 'a1a', false],
-            ['a1a', 'a1a', false],
         ];
     }
 }

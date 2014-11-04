@@ -1,7 +1,6 @@
 <?php
 
 namespace DiceCalc;
-use Symfony\Component\Config\Definition\Exception\Exception;
 
 /**
  * Class CalcOperation
@@ -20,28 +19,22 @@ class CalcOperation
      * @throws \Exception
      * @return bool|number
      */
-    public static function calc($operator, $operand2, $operand1)
+    public static function calc($operator, $operand1, $operand2)
     {
-        switch ($operator) {
-            case '+':
-                return self::add($operand1, $operand2);
-            case '*':
-                return self::multiply($operand1, $operand2);
-            case '-':
-                return self::subtract($operand1, $operand2);
-            case '/':
-                return self::divide($operand1, $operand2);
-            case '^':
-                return self::exponent($operand1, $operand2);
-            case '>':
-                return self::greaterthan($operand1, $operand2);
-            case '<':
-                return self::lessthan($operand1, $operand2);
-            case '=':
-                return self::equalto($operand1, $operand2);
-            default:
-                throw new \Exception('Unknown operator "' . $operator . '".');
+        $operators = [
+            '+' => 'add',
+            '*' => 'multiply',
+            '=' => 'equalto',
+            '<' => 'lessthan',
+            '>' => 'greaterthan',
+            '^' => 'exponent',
+            '/' => 'divide',
+            '-' => 'subtract',
+        ];
+        if(isset($operators[$operator])) {
+            return self::$operators[$operator](self::reduce($operand1), self::reduce($operand2));
         }
+        throw new \Exception('Unknown operator "' . $operator . '".');
     }
 
     /**
@@ -52,11 +45,11 @@ class CalcOperation
      */
     public static function reduce($operand)
     {
-        if ($operand instanceof Calc) {
-            return $operand();
-        }
-        if (is_numeric($operand)) {
+        if(is_numeric($operand)) {
             return $operand;
+        }
+        elseif ($operand instanceof Calc) {
+            return $operand();
         }
         throw new \Exception('This is not a number');
     }
@@ -67,24 +60,8 @@ class CalcOperation
      *
      * @return bool|number
      */
-    public static function add($operand1, $operand2)
+    protected static function add($operand1, $operand2)
     {
-        if (!is_numeric($operand1)) {
-            try {
-                $operand1 = self::reduce($operand1);
-            } catch (\Exception $e) {
-                return false;
-            }
-        }
-
-        if (!is_numeric($operand2)) {
-            try {
-                $operand2 = self::reduce($operand2);
-            } catch (\Exception $e) {
-                return false;
-            }
-        }
-
         return $operand1 + $operand2;
     }
 
@@ -94,13 +71,9 @@ class CalcOperation
      *
      * @return bool|number
      */
-    public static function multiply($operand1, $operand2)
+    protected static function multiply($operand1, $operand2)
     {
-        if (is_numeric($operand1) && is_numeric($operand2)) {
-            return $operand1 * $operand2;
-        }
-
-        return false;
+        return $operand1 * $operand2;
     }
 
     /**
@@ -109,13 +82,9 @@ class CalcOperation
      *
      * @return bool|number
      */
-    public static function subtract($operand1, $operand2)
+    protected static function subtract($operand1, $operand2)
     {
-        if (is_numeric($operand1) && is_numeric($operand2)) {
-            return $operand1 - $operand2;
-        }
-
-        return false;
+        return $operand1 - $operand2;
     }
 
     /**
@@ -124,13 +93,9 @@ class CalcOperation
      *
      * @return bool|number
      */
-    public static function divide($operand1, $operand2)
+    protected static function divide($operand1, $operand2)
     {
-        if (is_numeric($operand1) && is_numeric($operand2)) {
-            return $operand1 / $operand2;
-        }
-
-        return false;
+        return $operand1 / $operand2;
     }
 
     /**
@@ -139,13 +104,9 @@ class CalcOperation
      *
      * @return bool|number
      */
-    public static function exponent($operand1, $operand2)
+    protected static function exponent($operand1, $operand2)
     {
-        if (is_numeric($operand1) && is_numeric($operand2)) {
-            return pow($operand1, $operand2);
-        }
-
-        return false;
+        return pow($operand1, $operand2);
     }
 
     /**
@@ -154,24 +115,8 @@ class CalcOperation
      *
      * @return bool
      */
-    public static function greaterthan($operand1, $operand2)
+    protected static function greaterthan($operand1, $operand2)
     {
-        if (!is_numeric($operand1)) {
-            try {
-                $operand1 = self::reduce($operand1);
-            } catch (\Exception $e) {
-                return false;
-            }
-        }
-
-        if (!is_numeric($operand2)) {
-            try {
-                $operand2 = self::reduce($operand2);
-            } catch (\Exception $e) {
-                return false;
-            }
-        }
-
         return $operand1 > $operand2;
     }
 
@@ -181,13 +126,9 @@ class CalcOperation
      *
      * @return bool
      */
-    public static function lessthan($operand1, $operand2)
+    protected static function lessthan($operand1, $operand2)
     {
-        if (is_numeric($operand1) && is_numeric($operand2)) {
-            return ($operand1 < $operand2);
-        }
-
-        return false;
+        return ($operand1 < $operand2);
     }
 
     /**
@@ -196,12 +137,8 @@ class CalcOperation
      *
      * @return bool
      */
-    public static function equalto($operand1, $operand2)
+    protected static function equalto($operand1, $operand2)
     {
-        if (is_numeric($operand1) && is_numeric($operand2)) {
-            return ($operand1 == $operand2);
-        }
-
-        return false;
+        return ($operand1 == $operand2);
     }
 }
