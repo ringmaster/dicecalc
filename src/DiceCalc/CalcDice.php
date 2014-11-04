@@ -11,6 +11,8 @@ namespace DiceCalc;
  */
 class CalcDice extends CalcSet
 {
+    protected $saved_values = [];
+
     public function __construct($set_value)
     {
         $this->values = [];
@@ -44,24 +46,17 @@ class CalcDice extends CalcSet
                 $addvals = [$newval];
                 $addval = $newval;
 
-                if ($gtlt == '<') {
-                    while ($addval < $range) {
-                        $addval = $this->rolltype($matches['dietype']);
-                        $addvals[] = $addval;
-                    }
+                $evals = [
+                    '<' => function($addval, $range) { return $addval < $range; },
+                    '>' => function($addval, $range) { return $addval > $range; },
+                    '=' => function($addval, $range) { return $addval == $range; },
+                ];
+
+                while(isset($evals[$gtlt]) && $evals[$gtlt]($addval, $range)) {
+                    $addval = $this->rolltype($matches['dietype']);
+                    $addvals[] = $addval;
                 }
-                if ($gtlt == '>') {
-                    while ($addval > $range) {
-                        $addval = $this->rolltype($matches['dietype']);
-                        $addvals[] = $addval;
-                    }
-                }
-                if ($gtlt == '=') {
-                    while ($addval == $range) {
-                        $addval = $this->rolltype($matches['dietype']);
-                        $addvals[] = $addval;
-                    }
-                }
+
                 $newval = new Calc(implode('+', $addvals));
                 $newval = $newval();
             }
