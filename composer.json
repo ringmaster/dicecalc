@@ -12,7 +12,8 @@
         "pdepend/pdepend": "@stable",
         "sebastian/phpcpd": "@stable",
         "sebastian/phpdcd": "@stable",
-        "squizlabs/php_codesniffer": "@stable"
+        "squizlabs/php_codesniffer": "@stable",
+        "jakub-onderka/php-parallel-lint": "^0.9.2"
     },
     "authors": [
         {
