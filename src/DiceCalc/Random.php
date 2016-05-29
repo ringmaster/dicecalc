@@ -1,14 +1,14 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: owinkler
- * Date: 11/2/14
- * Time: 11:43 PM
- */
 
 namespace DiceCalc;
 
-
+/**
+ * Class Random
+ *
+ * @package DiceCalc
+ * @author  Owen Winkler <epithet@gmail.com>
+ * @license MIT http://opensource.org/licenses/MIT
+ */
 class Random {
     public static $queue = null;
     public static $queue_list = [];
