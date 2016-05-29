@@ -6,7 +6,7 @@
     "license": "MIT",
     "require-dev": {
         "phpunit/phpunit": "@stable",
-        "fabpot/php-cs-fixer": "@stable",
+        "friendsofphp/php-cs-fixer": "@stable",
         "phpmd/phpmd": "@stable",
         "phploc/phploc": "@stable",
         "pdepend/pdepend": "@stable",
