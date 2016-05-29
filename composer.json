@@ -3,6 +3,7 @@
     "description": "DiceCalc",
     "version": "1.0.0",
     "keywords": ["dice", "dice calc", "dice calculator", "dice roller"],
+    "license": "MIT",
     "require-dev": {
         "phpunit/phpunit": "@stable",
         "fabpot/php-cs-fixer": "@stable",
