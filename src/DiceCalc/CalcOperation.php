@@ -11,6 +11,18 @@ namespace DiceCalc;
  */
 class CalcOperation
 {
+
+    static protected $operators = [
+        '+' => 'add',
+        '*' => 'multiply',
+        '=' => 'equalto',
+        '<' => 'lessthan',
+        '>' => 'greaterthan',
+        '^' => 'exponent',
+        '/' => 'divide',
+        '-' => 'subtract',
+    ];
+
     /**
      * @param  string $operator
      * @param $operand2
@@ -21,18 +33,8 @@ class CalcOperation
      */
     public static function calc($operator, $operand1, $operand2)
     {
-        $operators = [
-            '+' => 'add',
-            '*' => 'multiply',
-            '=' => 'equalto',
-            '<' => 'lessthan',
-            '>' => 'greaterthan',
-            '^' => 'exponent',
-            '/' => 'divide',
-            '-' => 'subtract',
-        ];
-        if(isset($operators[$operator])) {
-            return self::$operators[$operator](self::reduce($operand1), self::reduce($operand2));
+        if(isset(static::$operators[$operator])) {
+            return call_user_func(array('self', static::$operators[$operator]), self::reduce($operand1), self::reduce($operand2));
         }
         throw new \Exception('Unknown operator "' . $operator . '".');
     }
